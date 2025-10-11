@@ -6,13 +6,13 @@
 #    By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/10 12:15:37 by oamairi           #+#    #+#              #
-#    Updated: 2025/10/10 12:20:09 by oamairi          ###   ########.fr        #
+#    Updated: 2025/10/11 12:34:57 by oamairi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS	=		-Wall -Wextra -Werror
 
-SRCS	=		philo.c
+SRCS	=		philo.c put.c
 
 OBJS	=		$(SRCS:.c=.o)
 
