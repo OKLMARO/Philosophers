@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 18:13:16 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/16 11:35:13 by oamairi          ###   ########.fr       */
+/*   Created: 2025/12/16 11:16:22 by oamairi           #+#    #+#             */
+/*   Updated: 2025/12/16 11:42:07 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
+#include "../include/philo.h"
 
-long	ft_atoi(const char *nptr)
+bool	check_argv(int argc, char **argv)
 {
-	int		i;
-	long	res;
+	int	i;
 
-	i = 0;
-	res = 0;
-	while (nptr[i] != '\0' && (nptr[i] >= '0' && nptr[i] <= '9'))
+	if (argc != 5 && argc != 6)
+		return (ft_putstr_fd("NBR ARG ERROR\n", 2), false);
+	i = 1;
+	while (i < argc)
 	{
-		res = res * 10 + (nptr[i] - '0');
-		i = i + 1;
+		if (ft_atoi(argv[i]) <= 0)
+			return (ft_putstr_fd("ARG ERROR\n", 2), false);
+		i++;
 	}
-	if (ft_isdigit(nptr[i]) == 0 && nptr[i] != '\0')
-		return (0);
-	return (res);
+	return (true);
 }
+
+void	init_data

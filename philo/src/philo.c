@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:20:14 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/15 18:21:37 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/16 11:39:04 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	*verif_pars(char **argv)
 
 int	main(int argc, char **argv)
 {
-	if (argc != 5 || argc != 6)
-		return (ft_putstr_fd("NBR ARG ERROR\n", 2), 1);
-	
+	if (check_argv(argc, argv) == false)
+		return (1);
+	init_
 }
