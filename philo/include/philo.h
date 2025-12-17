@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:19:14 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/16 11:19:10 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/17 10:38:25 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 	t_philo			*philos;
 }					t_data;
 
+char	*ft_strdup(const char *s);
 int		ft_atoi(const char *nptr);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
