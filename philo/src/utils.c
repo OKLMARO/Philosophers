@@ -6,15 +6,35 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:13:16 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/16 11:35:13 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/17 10:38:04 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../include/philo.h"
 
 int	ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
+}
+
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	char	*dest;
+
+	dest = malloc(sizeof(char) * ft_strlen((char *) s) + 1);
+	if (!dest)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		dest[i] = s[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
 long	ft_atoi(const char *nptr)
