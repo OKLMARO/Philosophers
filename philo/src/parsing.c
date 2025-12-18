@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:22 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/17 11:03:53 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/18 11:30:25 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,49 @@ t_data	*init_data(int argc, char **argv)
 
 bool	init_forks(t_data *data)
 {
-	
+	int	i;
+
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philos);
+	if (!data->forks)
+		return (false);
+	i = 0;
+	while (i < data->nb_philos)
+	{
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+		{
+			destroy_mutex_data(data->forks, NULL, i);
+			return (free(data->forks), false);
+		}
+		i++;
+	}
+	return (true);
+}
+
+bool	init_philos(t_data *data)
+{
+	int	i;
+
+	data->philos = malloc(sizeof(t_philo) * data->nb_philos);
+	if (!data->philos)
+		return (false);
+	i = 0;
+	while (i < data->nb_philos)
+	{
+		data->philos[i].id = i;
+		data->philos[i].data = data;
+		data->philos[i].last_meal_time = 0;
+		data->philos[i].meals_eaten = 0;
+		if (pthread_mutex_init(&data->philos[i].meal_lock, NULL) != 0)
+		{
+			destroy_mutex_data(NULL, data->philos, i);
+			return (free(data->philos), false);
+		}
+		if (i == 0)
+			data->philos[i].left_fork = &data->forks[data->nb_philos - 1];
+		else
+			data->philos[i].left_fork = &data->forks[i - 1];
+		data->philos[i].right_fork = &data->forks[i];
+		i++;
+	}
+	return (true);
 }
