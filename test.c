@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put.c                                              :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/11 12:31:50 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/20 11:12:59 by oamairi          ###   ########.fr       */
+/*   Created: 2025/12/20 10:31:29 by oamairi           #+#    #+#             */
+/*   Updated: 2025/12/20 10:57:06 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "philo/include/philo.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	main(void)
 {
-	write(fd, &c, 1);
-}
+	struct timeval current_time;
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], sizeof(char));
-		i++;
-	}
-}
-
-void	ft_putnbr_fd(long long n, int fd)
-{
-	if (n >= 10)
-		ft_putnbr_fd(n / 10, fd);
-	ft_putchar_fd(n % 10 + '0', fd);
+	gettimeofday(&current_time, NULL);
+	ft_putnbr_fd(current_time.tv_sec * 1000 + current_time.tv_usec / 1000, 1);
+	return (0);
 }

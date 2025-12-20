@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:19:14 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/18 11:24:47 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/20 11:53:52 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <sys/time.h>
+# include <stdio.h>
+
+typedef struct s_data t_data;
 
 typedef struct s_philo
 {
@@ -47,11 +51,16 @@ typedef struct s_data
 	t_philo			*philos;
 }					t_data;
 
+long	get_time(void);
+void	cleanup(t_data *data);
+bool	init_forks(t_data *data);
+bool	init_philos(t_data *data);
 char	*ft_strdup(const char *s);
 int		ft_atoi(const char *nptr);
-void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
+void	ft_putnbr_fd(long long n, int fd);
 bool	check_argv(int argc, char **argv);
+t_data	*init_data(int argc, char **argv);
 void	destroy_mutex_data(pthread_mutex_t *mutex, t_philo *philo, size_t size);
 
 #endif
