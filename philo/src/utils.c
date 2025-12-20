@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:13:16 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/18 11:26:59 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/20 12:45:03 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,25 @@ long	ft_atoi(const char *nptr)
 	if (ft_isdigit(nptr[i]) == 0 && nptr[i] != '\0')
 		return (0);
 	return (res);
+}
+
+void	cleanup(t_data *data)
+{
+	if (!data)
+		return ;
+	if (data->philos)
+	{
+		destroy_mutex_data(NULL, data->philos, data->nb_philos);
+		free(data->philos);
+	}
+	if (data->forks)
+	{
+		destroy_mutex_data(data->forks, NULL, data->nb_philos);
+		free(data->forks);
+	}
+	pthread_mutex_destroy(&data->write_lock);
+	pthread_mutex_destroy(&data->dead_lock);
+	pthread_mutex_destroy(&data->meal_check_lock);
 }
 
 void	destroy_mutex_data(pthread_mutex_t *mutex, t_philo *philo, size_t size)
