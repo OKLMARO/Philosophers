@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:13:16 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/20 12:45:03 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/23 11:55:17 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	cleanup(t_data *data)
 
 void	destroy_mutex_data(pthread_mutex_t *mutex, t_philo *philo, size_t size)
 {
-	int	j;
+	size_t	j;
 
 	if (mutex)
 	{

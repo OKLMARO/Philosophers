@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:22 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/18 11:30:25 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/23 12:00:58 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ bool	init_philos(t_data *data)
 	i = 0;
 	while (i < data->nb_philos)
 	{
-		data->philos[i].id = i;
+		data->philos[i].id = i + 1;
 		data->philos[i].data = data;
 		data->philos[i].last_meal_time = 0;
 		data->philos[i].meals_eaten = 0;

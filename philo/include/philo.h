@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:19:14 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/20 11:53:52 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/23 12:03:07 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_data
 	long			start_time;
 	bool			dead_flag;
 	bool			all_ate;
+	pthread_t		thread;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_check_lock;
@@ -52,15 +53,27 @@ typedef struct s_data
 }					t_data;
 
 long	get_time(void);
+void	join(t_data *data);
+void	eat(t_philo *philo);
 void	cleanup(t_data *data);
+bool	is_dead(t_data *data);
 bool	init_forks(t_data *data);
+void	sleep_prog(long milisec);
+size_t	ft_strlen(const char *s);
 bool	init_philos(t_data *data);
+void	*philo_routine(void *arg);
 char	*ft_strdup(const char *s);
-int		ft_atoi(const char *nptr);
+long	ft_atoi(const char *nptr);
+void	take_forks(t_philo *philo);
+void	drop_forks(t_philo *philo);
+void	set_dead_flag(t_data *data);
+void	philo_sleep(t_philo *philo);
 void	ft_putstr_fd(char *s, int fd);
+void	init_time_philo(t_data *data);
 void	ft_putnbr_fd(long long n, int fd);
 bool	check_argv(int argc, char **argv);
 t_data	*init_data(int argc, char **argv);
+void	print_status(t_philo *philo, char *status);
 void	destroy_mutex_data(pthread_mutex_t *mutex, t_philo *philo, size_t size);
 
 #endif
