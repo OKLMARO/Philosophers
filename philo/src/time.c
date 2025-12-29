@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 10:54:03 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/23 10:12:06 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/29 19:58:02 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long	get_time(void)
 	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
 }
 
-void	sleep_prog(long milisec)
+void	sleep_philo(long milisec)
 {
 	long	debut;
 	long	fin;
@@ -28,5 +28,5 @@ void	sleep_prog(long milisec)
 	debut = get_time();
 	fin = debut + milisec;
 	while (get_time() < fin)
-		usleep(1000);
+		usleep(100);
 }

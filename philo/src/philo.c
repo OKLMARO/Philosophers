@@ -6,11 +6,31 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:20:14 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/23 12:02:32 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/29 20:29:01 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+bool	philo_routine_suite(t_philo *philo)
+{
+	if (is_dead(philo->data) == true)
+		return (false);
+	take_forks(philo);
+	if (is_dead(philo->data) == true)
+		return (false);
+	eat(philo);
+	if (is_dead(philo->data) == true)
+		return (false);
+	drop_forks(philo);
+	if (is_dead(philo->data) == true)
+		return (false);
+	philo_sleep(philo);
+	if (is_dead(philo->data) == true)
+		return (false);
+	print_status(philo, "is thinking");
+	return (true);
+}
 
 void	*philo_routine(void *arg)
 {
@@ -21,27 +41,20 @@ void	*philo_routine(void *arg)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		print_status(philo, "has taken a fork");
-		sleep_prog(philo->data->time_to_die + 1);
+		sleep_philo(philo->data->time_to_die + 1);
 		return (pthread_mutex_unlock(philo->left_fork), NULL);
 	}
 	if (philo->id % 2 == 0)
-		usleep(100);
+		usleep(1000);
 	while (true)
 	{
-		if (is_dead(philo->data) == true)
-			return (NULL);
-		take_forks(philo);
-		eat(philo);
-		drop_forks(philo);
-		philo_sleep(philo);
-		print_status(philo, "is thinking");
-		if (is_dead(philo->data) == true)
+		if (philo_routine_suite(philo) == false)
 			return (NULL);
 	}
 	return (NULL);
 }
 
-void	pegasus(t_data *data)
+void	count_meal(t_data *data)
 {
 	int	i;
 	int	compteur;
@@ -60,7 +73,7 @@ void	pegasus(t_data *data)
 		set_dead_flag(data);
 }
 
-bool	stuxnet(t_data *data, int i)
+bool	check_if_died(t_data *data, int i)
 {
 	long	last_meal_time;
 
@@ -70,10 +83,10 @@ bool	stuxnet(t_data *data, int i)
 	if (get_time() - last_meal_time > data->time_to_die)
 	{
 		pthread_mutex_lock(&data->write_lock);
+		set_dead_flag(data);
 		printf("%ld %ld died\n", get_time() - data->start_time,
 			data->philos[i].id);
 		pthread_mutex_unlock(&data->write_lock);
-		set_dead_flag(data);
 		return (false);
 	}
 	return (true);
@@ -90,17 +103,17 @@ void	*palantir(void *arg)
 		i = 0;
 		while (i < data->nb_philos)
 		{
-			if (stuxnet(data, i) == false)
+			if (check_if_died(data, i) == false)
 				return (NULL);
 			i++;
 		}
 		if (data->must_eat_count != -1)
 		{
-			pegasus(data);
+			count_meal(data);
 			if (is_dead(data) == true)
 				return (NULL);
 		}
-		usleep(1000);
+		usleep(100);
 	}
 	return (NULL);
 }

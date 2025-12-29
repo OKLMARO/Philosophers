@@ -6,11 +6,23 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 12:31:50 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/20 11:12:59 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/29 20:24:28 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i = i + 1;
+	}
+	return (i);
+}
 
 void	ft_putchar_fd(char c, int fd)
 {

@@ -6,28 +6,16 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:32:18 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/23 12:04:04 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/29 20:32:39 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i = i + 1;
-	}
-	return (i);
-}
-
 void	philo_sleep(t_philo *philo)
 {
 	print_status(philo, "is sleeping");
-	sleep_prog(philo->data->time_to_sleep);
+	sleep_philo(philo->data->time_to_sleep);
 }
 
 void	join(t_data *data)

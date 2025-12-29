@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:19:14 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/23 12:03:07 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/29 19:58:02 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	eat(t_philo *philo);
 void	cleanup(t_data *data);
 bool	is_dead(t_data *data);
 bool	init_forks(t_data *data);
-void	sleep_prog(long milisec);
+void	sleep_philo(long milisec);
 size_t	ft_strlen(const char *s);
 bool	init_philos(t_data *data);
 void	*philo_routine(void *arg);

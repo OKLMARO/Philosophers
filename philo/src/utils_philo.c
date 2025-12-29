@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 09:40:57 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/23 10:18:04 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/29 20:35:01 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	set_dead_flag(t_data *data)
 
 void	take_forks(t_philo *philo)
 {
+	if (is_dead(philo->data) == true)
+		return ;
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->left_fork);
@@ -58,5 +60,5 @@ void	eat(t_philo *philo)
 	philo->meals_eaten = philo->meals_eaten + 1;
 	pthread_mutex_unlock(&philo->meal_lock);
 	print_status(philo, "is eating");
-	sleep_prog(philo->data->time_to_eat);
+	sleep_philo(philo->data->time_to_eat);
 }
