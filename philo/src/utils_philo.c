@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 09:40:57 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/29 20:35:01 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/30 09:59:13 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	set_dead_flag(t_data *data)
 
 void	take_forks(t_philo *philo)
 {
-	if (is_dead(philo->data) == true)
-		return ;
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->left_fork);

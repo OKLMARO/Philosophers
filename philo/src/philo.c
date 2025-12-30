@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:20:14 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/29 20:29:01 by oamairi          ###   ########.fr       */
+/*   Updated: 2025/12/30 10:26:25 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ bool	philo_routine_suite(t_philo *philo)
 		return (false);
 	take_forks(philo);
 	if (is_dead(philo->data) == true)
-		return (false);
+		return (drop_forks(philo), false);
 	eat(philo);
 	if (is_dead(philo->data) == true)
-		return (false);
+		return (drop_forks(philo), false);
 	drop_forks(philo);
 	if (is_dead(philo->data) == true)
 		return (false);
@@ -52,25 +52,6 @@ void	*philo_routine(void *arg)
 			return (NULL);
 	}
 	return (NULL);
-}
-
-void	count_meal(t_data *data)
-{
-	int	i;
-	int	compteur;
-
-	i = 0;
-	compteur = 0;
-	while (i < data->nb_philos)
-	{
-		pthread_mutex_lock(&data->philos[i].meal_lock);
-		if (data->philos[i].meals_eaten >= data->must_eat_count)
-			compteur++;
-		pthread_mutex_unlock(&data->philos[i].meal_lock);
-		i++;
-	}
-	if (compteur == data->nb_philos)
-		set_dead_flag(data);
 }
 
 bool	check_if_died(t_data *data, int i)
