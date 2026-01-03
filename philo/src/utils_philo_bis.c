@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:32:18 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/30 10:28:21 by oamairi          ###   ########.fr       */
+/*   Updated: 2026/01/03 10:32:25 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void	join(t_data *data)
 
 void	print_status(t_philo *philo, char *status)
 {
-	pthread_mutex_lock(&philo->data->dead_lock);
 	pthread_mutex_lock(&philo->data->write_lock);
+	pthread_mutex_lock(&philo->data->dead_lock);
 	if (philo->data->dead_flag == false)
 	{
 		printf("%ld %ld %s\n", get_time() - philo->data->start_time,
 			philo->id, status);
 	}
-	pthread_mutex_unlock(&philo->data->write_lock);
 	pthread_mutex_unlock(&philo->data->dead_lock);
+	pthread_mutex_unlock(&philo->data->write_lock);
 }
 
 void	init_time_philo(t_data *data)
