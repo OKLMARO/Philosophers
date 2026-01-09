@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:19:14 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/30 10:29:07 by oamairi          ###   ########.fr       */
+/*   Updated: 2026/01/09 16:57:38 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_data
 }					t_data;
 
 long	get_time(void);
-void	join(t_data *data);
+int		join(t_data *data);
 void	eat(t_philo *philo);
 void	cleanup(t_data *data);
 bool	is_dead(t_data *data);

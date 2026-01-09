@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:20:14 by oamairi           #+#    #+#             */
-/*   Updated: 2025/12/30 10:26:25 by oamairi          ###   ########.fr       */
+/*   Updated: 2026/01/09 17:05:33 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,20 +109,20 @@ int	main(int argc, char **argv)
 	data = init_data(argc, argv);
 	if (!data)
 		return (1);
-	if (init_forks(data) == false)
-		return (cleanup(data), free(data), 1);
-	if (init_philos(data) == false)
+	if (init_forks(data) == false || init_philos(data) == false)
 		return (cleanup(data), free(data), 1);
 	data->start_time = get_time();
 	i = 0;
 	init_time_philo(data);
 	while (i < data->nb_philos)
 	{
-		pthread_create(&data->philos[i].thread, NULL, philo_routine,
-			&data->philos[i]);
+		if (pthread_create(&data->philos[i].thread, NULL, philo_routine,
+			&data->philos[i]) != 0)
+			return (cleanup(data), free(data), 1);
 		i++;
 	}
-	pthread_create(&data->thread, NULL, palantir, data);
-	join(data);
+	if (pthread_create(&data->thread, NULL, palantir, data) != 0
+		|| join(data) != 0)
+		return (cleanup(data), free(data), 1);
 	return (cleanup(data), free(data), 0);
 }

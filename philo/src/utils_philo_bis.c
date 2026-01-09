@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:32:18 by oamairi           #+#    #+#             */
-/*   Updated: 2026/01/03 10:32:25 by oamairi          ###   ########.fr       */
+/*   Updated: 2026/01/09 16:59:46 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ void	philo_sleep(t_philo *philo)
 	sleep_philo(philo->data->time_to_sleep);
 }
 
-void	join(t_data *data)
+int	join(t_data *data)
 {
 	int	i;
 
-	pthread_join(data->thread, NULL);
+	if (pthread_join(data->thread, NULL) != 0)
+		return (1);
 	i = 0;
 	while (i < data->nb_philos)
 	{
-		pthread_join(data->philos[i].thread, NULL);
+		if (pthread_join(data->philos[i].thread, NULL) != 0)
+			return (1);
 		i++;
 	}
+	return (0);
 }
 
 void	print_status(t_philo *philo, char *status)
