@@ -6,7 +6,7 @@
 /*   By: oamairi <oamairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:20:14 by oamairi           #+#    #+#             */
-/*   Updated: 2026/01/09 17:05:33 by oamairi          ###   ########.fr       */
+/*   Updated: 2026/01/09 17:13:37 by oamairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	main(int argc, char **argv)
 	while (i < data->nb_philos)
 	{
 		if (pthread_create(&data->philos[i].thread, NULL, philo_routine,
-			&data->philos[i]) != 0)
+				&data->philos[i]) != 0)
 			return (cleanup(data), free(data), 1);
 		i++;
 	}
